@@ -5,6 +5,8 @@ import http from 'http';
 import {Server} from 'socket.io';
 import cors from 'cors';
 import authRouter from './routes/auth';
+import aiRouter from './routes/ai';
+import initSocket from './socket';
 
 dotenv.config();
 connectDB();
@@ -22,3 +24,11 @@ app.use(express.json());
 //app.use(express.urlencoded({extended:true}));
 
 app.use("/api/auth",authRouter);
+app.use("/api/ai/",aiRouter);
+
+initSocket(io);
+
+const PORT=process.env.PORT||4000;
+server.listen(PORT,()=>{
+    console.log(`Server running on port ${PORT}`);
+})
