@@ -26,8 +26,22 @@ export default function LoginPage(){
     }
     return(
         <div className="flex h-screen items-center justify-center bg-gray-100">
-            <form>
-
+            <form onSubmit={handleLogin} className='bg-white p-6 rounded-xl shadow-md space-y-3 w-80'>
+                <h1 className='text-xl font-bold'>Login</h1>
+                <input
+                    type="text" placeholder="Username" 
+                    className="w-full border p-2 rounded"
+                    value={username}
+                    onChange={(e)=>setUsername(e.target.value)}/>
+                <input
+                    type="password" placeholder="Password"
+                    className="w-full border p-2 rounded"
+                    value={password}
+                    onChange={(e)=>setPassword(e.target.value)}/>
+                
+                <button type="submit" className="w-full bg-blue-500 text-white p-2 rounded">
+                    Login
+                </button>
             </form>
         </div>
     )
