@@ -33,6 +33,10 @@ export default function Home() {
           </div>
         ))}
       </div>
+      <div className="flex p-2 border-t">
+        <input className="flex-1 border p-2 rounded" value={message} onChange={(e)=>{setMessage(e.target.value)}} placeholder="Type message..."/>
+        <button className="ml-2 bg-blue-500 text-white px-4 rounded" onClick={sendMessage}>Send</button>
+      </div>
     </div>
   );
 }
