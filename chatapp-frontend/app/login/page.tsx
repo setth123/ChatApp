@@ -1,7 +1,7 @@
 "use client"
 
 import api from "@/lib/api";
-import { useAuth } from "@/store/useAuth";
+import { useAuth } from "@/useAuth";
 import axios from "axios";
 import { useRouter } from "next/router";
 import { useState } from "react"
