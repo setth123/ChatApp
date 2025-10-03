@@ -42,7 +42,28 @@ export default function MessageInput({onSend}:{onSend:(msg:string)=>void}){
             setSuggestions(data);
         }
         catch(err){
-            console.log()
+            alert("AI Suggestion Error: "+err);
+        }
+        finally{
+            setLoading(false);
         }
     }
+    function handleSend(){
+        if(message.trim()=="")return;
+        onSend(message);
+        setMessage("");
+        setSuggestions([]);
+        fetchSuggestion(message);
+    }
+    return(
+        <div className="border-t p-2">
+            <div className="flex">
+                <input className="flex-1 border p-2 rounded"
+                        value={message} onChange={(e)=>setMessage(e.target.value)}
+                        placeholder="Type your message..."/>
+                <button onClick={handleSend} className="ml-2 bg-blue-500 text-white px-4 rounded">Send</button>
+            </div>
+            <Suggestions suggestions={suggestions} onPick={(text)=>setMessage(text)}/>
+        </div>
+    )
 }
