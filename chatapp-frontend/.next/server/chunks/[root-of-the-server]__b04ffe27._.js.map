@@ -1,0 +1,8 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 3, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"","debugId":null}},
+    {"offset": {"line": 115, "column": 0}, "map": {"version":3,"sources":["file:///home/thanhnguyen/Documents/ChatApp/chatapp-frontend/lib/api.ts"],"sourcesContent":["import axios from \"axios\";\n\nconst api=axios.create({\n    baseURL:\"http://localhost:4000/api\",\n})\nexport default api;"],"names":[],"mappings":";;;;AAAA;;AAEA,MAAM,MAAI,kJAAK,CAAC,MAAM,CAAC;IACnB,SAAQ;AACZ;uCACe","debugId":null}},
+    {"offset": {"line": 141, "column": 0}, "map": {"version":3,"sources":["file:///home/thanhnguyen/Documents/ChatApp/chatapp-frontend/app/api/suggest/route.ts"],"sourcesContent":["import api from \"@/lib/api\";\nimport { NextResponse } from \"next/server\";\n\nexport async function POST(req:Request) {\n    const text=await req.json();\n    const body=[`Can you explain more about \"${text}\"?`,\n    \"That’s interesting, tell me more!\",\n    \"I see, how do you feel about that?\",]\n    const res=await api.post(\"/ai/suggest\",body);\n    return NextResponse.json(res.data);\n}"],"names":[],"mappings":";;;;AAAA;AACA;;;AAEO,eAAe,KAAK,GAAW;IAClC,MAAM,OAAK,MAAM,IAAI,IAAI;IACzB,MAAM,OAAK;QAAC,CAAC,4BAA4B,EAAE,KAAK,EAAE,CAAC;QACnD;QACA;KAAsC;IACtC,MAAM,MAAI,MAAM,uHAAG,CAAC,IAAI,CAAC,eAAc;IACvC,OAAO,gJAAY,CAAC,IAAI,CAAC,IAAI,IAAI;AACrC","debugId":null}}]
+}

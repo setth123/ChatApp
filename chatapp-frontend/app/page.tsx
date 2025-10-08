@@ -1,40 +1,17 @@
 "use client";
 
-import MessageInput from "@/components/MessageInput";
-import socket from "@/lib/socket";
-import { useEffect, useState } from "react";
+import ChatWindow from "@/components/ChatWindow";
+import Sidebar from "@/components/Sidebar";
+import { useState } from "react";
 
 export default function Home() {
-  const [room]=useState("global");
-  const [message,setMessage]=useState("");
-  const [messages,setMessages]=useState<{sender:string;content:string}[]>([]);
-
-  useEffect(()=>{
-    socket.emit("join_room",room);
-    socket.on("receive_message", (msg) => {
-      setMessages((prev) => [...prev, msg]);
-    });
-    return () => {
-      socket.off("receive_message");
-    };
-
-  },[room])
-  function sendMessage() {
-    if (message.trim() === "") return;
-    socket.emit("send_message", { sender: "Me", content: message, room });
-    setMessages((prev) => [...prev, { sender: "Me", content: message }]);
-    setMessage("");
-  }
+  const[room,setRoom]=useState<string>("General");
   return (
-    <div className="flex flex-col h-screen max-w-xl mx-auto">
-      <div className="flex-1 overflow-y-auto border p-3 space-y-2 bg-gray-50">
-        {messages.map((m, i) => (
-          <div key={i} className="p-2 rounded-bg-white shadow">
-            <b>{m.sender}: </b>{m.content}
-          </div>
-        ))}
-      </div>
-      <MessageInput onSend={sendMessage}/>
+    <div className="h-screen flex">
+        <Sidebar currentRoom="{room}" onSelectRoom={(r)=>setRoom(r)}/>
+        <div className="flex-1 flex flex-col">
+          <ChatWindow room={room}/>
+        </div>
     </div>
   );
 }
